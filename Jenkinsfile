@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh '/home/jenkins/gpon-build.sh'
+                sh '/home/jenkins/build/gpon-onu.sh'
             }
         }
     }
