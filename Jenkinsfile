@@ -17,8 +17,6 @@ pipeline {
             agent any
             steps {
                 sh 'cat /etc/issue'
-                sh 'pwd'
-                sh 'ls -al'
             }
         }
 
@@ -26,28 +24,22 @@ pipeline {
             agent { dockerfile { dir 'docker' } }
             steps {
                 sh 'cat /etc/issue'
-                sh 'echo xx'
-                sh 'echo xy'
             }
         }
         stage('Build') {
-            agent { dockerfile { dir 'docker' } }
+            agent any
             steps {
                 sh 'cat /etc/issue'
-                sh 'pwd'
-                sh 'ls -al'
-                sh 'ls -al /tmp'
             }
         }
         stage('Deploy') {
             agent { dockerfile { dir 'docker' } }
             steps {
                 sh 'cat /etc/issue'
-                sh 'echo dep'
             }
         }
         stage('Tests') {
-agent any
+            agent any
             steps {
                 sh 'cat /etc/issue'
                 sh 'touch test.xml'
