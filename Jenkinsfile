@@ -31,6 +31,7 @@ pipeline {
         }
         stage('Tests') {
             steps {
+                sh 'touch test.xml'
                 junit keepLongStdio: true, testResults: 'test.xml'
             }
         }
