@@ -28,6 +28,7 @@ stage('Build') {
 stage('Test') {
     parallel test_fh: {
         node {
+            echo "Testing fh..."
             unstash 'firmware'
             sh 'touch test.xml'
             lock('gpon_test_fh') {
@@ -38,6 +39,8 @@ stage('Test') {
     },
     test_hw: {
         node {
+            echo "Testing hw..."
+            sh 'ls -al'
             unstash 'firmware'
             lock('gpon_test_fh') {
                 sh 'ls -al'
