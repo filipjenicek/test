@@ -1,7 +1,6 @@
-FROM ubuntu:trusty
+FROM debian::latest
 
 
 
-RUN \
-    apt-get update
+RUN echo xxx
 

@@ -16,6 +16,7 @@ pipeline {
         stage ('Prepare agent') {
             agent any
             steps {
+                sh 'cat /etc/issue'
                 sh 'pwd'
                 sh 'ls -al'
             }
@@ -24,6 +25,7 @@ pipeline {
         stage('Prepare') {
             agent { dockerfile { dir 'docker' } }
             steps {
+                sh 'cat /etc/issue'
                 sh 'echo xx'
                 sh 'echo xy'
             }
@@ -31,6 +33,7 @@ pipeline {
         stage('Build') {
             agent { dockerfile { dir 'docker' } }
             steps {
+                sh 'cat /etc/issue'
                 sh 'pwd'
                 sh 'ls -al'
                 sh 'ls -al /tmp'
@@ -39,12 +42,14 @@ pipeline {
         stage('Deploy') {
             agent { dockerfile { dir 'docker' } }
             steps {
+                sh 'cat /etc/issue'
                 sh 'echo dep'
             }
         }
         stage('Tests') {
 agent any
             steps {
+                sh 'cat /etc/issue'
                 sh 'touch test.xml'
                 junit keepLongStdio: true, testResults: 'test.xml'
             }
