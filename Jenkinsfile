@@ -29,11 +29,15 @@ pipeline {
                 sh 'echo dep'
             }
         }
+        stage('Tests') {
+            steps {
+                junit keepLongStdio: true, testResults: 'test.xml'
+            }
+        }
     }
     post { 
         always { 
             echo 'I will always say Hello again!'
-            junit keepLongStdio: true, testResults: 'test.xml'
         }
         success { 
             echo 'Good'
