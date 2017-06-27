@@ -2,13 +2,13 @@
 
 pipeline {
     //agent any
-//agent {
-//    docker {
-//        image 'maven:3-alpine'
-//        args  '-v /tmp:/tmp'
-//    }
-//}
-    agent { dockerfile { dir 'docker' } }
+agent {
+    docker {
+        image 'onu'
+        args  '-v /tmp:/tmp'
+    }
+}
+//    agent { dockerfile { dir 'docker' } }
 
     stages {
         stage('Prepare') {
@@ -21,6 +21,7 @@ pipeline {
             steps {
                 sh 'pwd'
                 sh 'ls -al'
+                sh 'ls -al /tmp'
             }
         }
         stage('Deploy') {
