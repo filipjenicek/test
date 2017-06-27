@@ -5,7 +5,9 @@ pipeline {
 
     stages {
         stage ('Cleanup') {
-            sh '[ -d build_dir ] && sudo /home/jenkins/rm-build_dir.sh'
+            steps {
+                sh '[ -d build_dir ] && sudo /home/jenkins/rm-build_dir.sh'
+            }
         }
 
         stage ('Docker') {
