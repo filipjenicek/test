@@ -27,19 +27,19 @@ stage('Build') {
 
 stage('Test') {
     parallel test_fh: {
-        node('test_fh') {
+        node {
             unstash 'firmware'
             sh 'touch test.xml'
-            lock('gpon-test-fh') {
+            lock('gpon_test_fh') {
                 sh 'ls -al'
                 junit keepLongStdio: true, testResults: 'test.xml'
             }
         }
     },
     test_hw: {
-        node('test-hw') {
+        node {
             unstash 'firmware'
-            lock('gpon-test-fh') {
+            lock('gpon_test_fh') {
                 sh 'ls -al'
             }
         }
