@@ -38,11 +38,23 @@ pipeline {
 
         stage('Tests') {
             steps {
-                sh 'cat /etc/issue'
-                sh 'touch test.xml'
-                //sh 'false'
-                junit keepLongStdio: true, testResults: 'test.xml'
+                stage('TestA') {
+                    steps {
+                        sh 'cat /etc/issue'
+                    }
+                }
 
+                stage('TestB') {
+                    steps {
+                        sh 'cat /etc/issue'
+                        sh 'touch test.xml'
+                        //sh 'false'
+                        junit keepLongStdio: true, testResults: 'test.xml'
+
+                    }
+                }
+                
+                
             }
         }
     }
