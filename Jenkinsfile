@@ -27,7 +27,8 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'scp -o StrictHostKeyChecking=no test.xml autotest-onu@10.167.167.150:ftp/'
+                archiveArtifacts artifacts: 'build_dir/images/SFU*.bin', fingerprint: true
+                sh 'scp -o 'build_dir/images/SFU*.bin' autotest-onu@10.167.167.150:ftp/'
             }
         }
 
