@@ -26,7 +26,7 @@ stage('Build') {
 }
 
 stage('Test') {
-    paralel test_fh: {
+    parallel test_fh: {
         node('test_fh') {
             unstash 'firmware'
             sh 'touch test.xml'
