@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage ('Cleanup') {
             steps {
-           //     sh '[ -d build_dir ] && sudo /home/jenkins/rm-build_dir.sh"'
+                sh '[ ! -d build_dir ] || sudo /home/jenkins/rm-build_dir.sh'
 sh 'false || true'
 sh 'true || false'
 sh 'echo a'
