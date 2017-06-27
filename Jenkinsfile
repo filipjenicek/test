@@ -1,13 +1,14 @@
 #!/usr/bin/groovy
 pipeline {
     //agent any
-agent {
-    docker {
-        image 'maven:3-alpine'
-        label 'my-defined-label'
-        args  '-v /tmp:/tmp'
-    }
-}
+//agent {
+//    docker {
+//        image 'maven:3-alpine'
+//        args  '-v /tmp:/tmp'
+//    }
+//}
+    agent { dockerfile { dir 'docker' } }
+
     stages {
         stage('Prepare') {
             steps {
