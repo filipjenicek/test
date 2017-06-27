@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage ('Cleanup') {
             steps {
-                sh '[ ! -d build_dir ] || sudo /home/jenkins/rm-build_dir.sh'
+                //sh '[ ! -d build_dir ] || sudo /home/jenkins/rm-build_dir.sh'
             }
         }
 
@@ -30,8 +30,8 @@ pipeline {
                 sh 'pwd'
                 sh 'ls -al'
                 sh 'ls -al build'
-                archiveArtifacts artifacts: 'build/build_dir/images/SFU*.bin', fingerprint: true
-                sh 'scp build/build_dir/images/SFU*.bin autotest-onu@10.167.167.150:ftp/'
+                archiveArtifacts artifacts: 'build_dir/images/SFU*.bin', fingerprint: true
+                sh 'scp build_dir/images/SFU*.bin autotest-onu@10.167.167.150:ftp/'
             }
         }
 
