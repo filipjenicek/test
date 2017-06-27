@@ -20,13 +20,15 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'cat /etc/issue'
-                sh 'docker run --rm -t -v "$PWD:/build/:rw" onu /bin/bash -c "ls"'
+                sh 'docker run --rm -t -v "$PWD:/build/:rw" onu /bin/bash -c "cd /build && ls -al"'
                 //sh 'docker run --rm -t -v "$PWD:/build/:rw" onu /bin/bash -c "cd /build && ./build.sh"'
             }
         }
 
         stage('Deploy') {
             steps {
+                sh 'pwd'
+                sh 'ls -al'
                 archiveArtifacts artifacts: 'build_dir/images/SFU*.bin', fingerprint: true
                 sh 'scp build_dir/images/SFU*.bin autotest-onu@10.167.167.150:ftp/'
             }
