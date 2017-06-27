@@ -1,4 +1,5 @@
-#!/usr/bin/groovy
+#!/usr/bin/env groovy
+
 pipeline {
     //agent any
 //agent {
