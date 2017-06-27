@@ -1,6 +1,18 @@
 #!/usr/bin/env groovy
 
 pipeline {
+
+    agent any
+    stages {
+        stage ('Prepare agent') {
+            steps {
+                sh 'pwd'
+                sh 'ls -al'
+            }
+        }
+    }
+
+
     //agent any
 //    agent {
 //        docker {
