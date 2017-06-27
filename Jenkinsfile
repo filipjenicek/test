@@ -7,9 +7,6 @@ pipeline {
         stage ('Cleanup') {
             steps {
                 sh '[ ! -d build_dir ] || sudo /home/jenkins/rm-build_dir.sh'
-sh 'false || true'
-sh 'true || false'
-sh 'echo a'
             }
         }
 
@@ -38,13 +35,16 @@ sh 'echo a'
             steps {
                 sh 'cat /etc/issue'
                 sh 'touch test.xml'
+                sh 'false'
                 junit keepLongStdio: true, testResults: 'test.xml'
+
             }
         }
     }
     post { 
         always { 
             echo 'I will always say Hello again!'
+            junit keepLongStdio: true, testResults: 'test.xml'
         }
         success { 
             echo 'Good'
