@@ -19,8 +19,12 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh '/home/jenkins/build/gpon-onu.sh'
+                sh 'pwd'
+                sh 'ls -al'
             }
+        }
+        stage('Deploy') {
+
         }
     }
     post { 
