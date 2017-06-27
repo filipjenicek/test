@@ -27,7 +27,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                echo "Nothing here yet"
+                sh 'scp -o StrictHostKeyChecking=no test.xml autotest-onu@10.167.167.150:ftp/'
             }
         }
 
