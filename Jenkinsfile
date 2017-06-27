@@ -28,7 +28,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 archiveArtifacts artifacts: 'build_dir/images/SFU*.bin', fingerprint: true
-                sh 'scp -o 'build_dir/images/SFU*.bin' autotest-onu@10.167.167.150:ftp/'
+                sh 'scp -o build_dir/images/SFU*.bin autotest-onu@10.167.167.150:ftp/'
             }
         }
 
