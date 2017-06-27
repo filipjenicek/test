@@ -6,7 +6,9 @@ pipeline {
     stages {
         stage ('Cleanup') {
             steps {
-           //     sh 'bash -c "[ -d build_dir ] && sudo /home/jenkins/rm-build_dir.sh"'
+           //     sh '[ -d build_dir ] && sudo /home/jenkins/rm-build_dir.sh"'
+sh 'false || true'
+sh 'true || false'
 sh 'echo a'
             }
         }
@@ -14,7 +16,7 @@ sh 'echo a'
         stage ('Docker') {
             steps {
                 sh '[ -f docker/crosstools-mips-gcc-4.6-linux-3.4-uclibc-0.9.32-binutils-2.21.Rel1.2.tar.bz2 ] || cp /home/ubnt/crosstools-mips-gcc-4.6-linux-3.4-uclibc-0.9.32-binutils-2.21.Rel1.2.tar.bz2 docker/'
-                sh 'docker build . -t onu'
+                sh 'docker build docker -t onu'
             }
         }
 
