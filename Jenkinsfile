@@ -29,6 +29,7 @@ pipeline {
             steps {
                 sh 'pwd'
                 sh 'ls -al'
+                sh 'ls -al build'
                 archiveArtifacts artifacts: 'build/build_dir/images/SFU*.bin', fingerprint: true
                 sh 'scp build/build_dir/images/SFU*.bin autotest-onu@10.167.167.150:ftp/'
             }
