@@ -40,7 +40,7 @@ pipeline {
             steps {
                 sh 'cat /etc/issue'
                 sh 'touch test.xml'
-                sh 'false'
+                //sh 'false'
                 junit keepLongStdio: true, testResults: 'test.xml'
 
             }
