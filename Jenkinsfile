@@ -32,8 +32,12 @@ stage('Test') {
             unstash 'firmware'
             sh 'touch test.xml'
             lock('gpon_test_fh') {
+                for (int i = 0; i < 256; i++) {
+                    sh "echo Hello ${i}"
+                }
                 sh 'ls -al'
                 junit keepLongStdio: true, testResults: 'test.xml'
+
             }
         }
     },
@@ -42,8 +46,10 @@ stage('Test') {
             echo "Testing hw..."
             sh 'ls -al'
             unstash 'firmware'
-            lock('gpon_test_fh') {
-                sh 'ls -al'
+            lock('gpon_test_hw') {
+                for (int i = 0; i < 256; i++) {
+                    sh "echo Hello ${i}"
+                }
             }
         }
     }
