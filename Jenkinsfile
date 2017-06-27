@@ -2,13 +2,13 @@
 
 pipeline {
     //agent any
-agent {
-    docker {
-        image 'onu'
-        args  '-v /tmp:/tmp'
-    }
-}
-//    agent { dockerfile { dir 'docker' } }
+//    agent {
+//        docker {
+//            image 'onu'
+//            args  '-v /tmp:/tmp'
+ //       }
+//    }
+    agent { dockerfile { dir 'docker' } }
 
     stages {
         stage('Prepare') {
@@ -33,6 +33,7 @@ agent {
     post { 
         always { 
             echo 'I will always say Hello again!'
+            junit keepLongStdio: true, testResults: 'test.xml'
         }
         success { 
             echo 'Good'
