@@ -6,6 +6,7 @@ pipeline {
     stages {
         stage ('Cleanup') {
             steps {
+                echo "nic"
                 //sh '[ ! -d build_dir ] || sudo /home/jenkins/rm-build_dir.sh'
             }
         }
