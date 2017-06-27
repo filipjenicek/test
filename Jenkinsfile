@@ -1,14 +1,14 @@
 #!/usr/bin/env groovy
 
 pipeline {
-    agent any
+    //agent any
 //    agent {
 //        docker {
 //            image 'onu'
 //            args  '-v /tmp:/tmp'
  //       }
 //    }
-//    agent { dockerfile { dir 'docker' } }
+    agent { dockerfile { dir 'docker' } }
 
     stages {
         stage('Prepare') {
