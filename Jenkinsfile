@@ -1,45 +1,35 @@
 #!/usr/bin/env groovy
 
 pipeline {
-    agent none
-
-    //agent any
-//    agent {
-//        docker {
-//            image 'onu'
-//            args  '-v /tmp:/tmp'
- //       }
-//    }
-    
+    agent any  
 
     stages {
-        stage ('Prepare agent') {
-            agent any
+        stage ('Cleanup') {
+            sh '[ -d build_dir ] && sudo /home/jenkins/rm-build_dir.sh'
+        }
+
+        stage ('Docker') {
             steps {
-                sh 'cat /etc/issue'
+                sh '[ -f docker/crosstools-mips-gcc-4.6-linux-3.4-uclibc-0.9.32-binutils-2.21.Rel1.2.tar.bz2 ] || cp /home/ubnt/crosstools-mips-gcc-4.6-linux-3.4-uclibc-0.9.32-binutils-2.21.Rel1.2.tar.bz2 docker/'
+                sh 'docker build . -t onu'
             }
         }
 
-        stage('Prepare') {
-            agent { dockerfile { dir 'docker' } }
-            steps {
-                sh 'cat /etc/issue'
-            }
-        }
         stage('Build') {
-            agent any
             steps {
                 sh 'cat /etc/issue'
+                sh 'docker run --rm -t -v "$PWD:/build/:rw" onu /bin/bash -c "ls"'
+                //sh 'docker run --rm -t -v "$PWD:/build/:rw" onu /bin/bash -c "cd /build && ./build.sh"'
             }
         }
+
         stage('Deploy') {
-            agent { dockerfile { dir 'docker' } }
             steps {
-                sh 'cat /etc/issue'
+                echo "Nothing here yet"
             }
         }
+
         stage('Tests') {
-            agent any
             steps {
                 sh 'cat /etc/issue'
                 sh 'touch test.xml'
@@ -57,8 +47,5 @@ pipeline {
         failure { 
             echo 'Failure'
         }
-
-
     }
-
 }
