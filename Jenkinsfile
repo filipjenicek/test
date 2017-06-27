@@ -1,17 +1,7 @@
 #!/usr/bin/env groovy
 
 pipeline {
-
-    agent any
-    stages {
-        stage ('Prepare agent') {
-            steps {
-                sh 'pwd'
-                sh 'ls -al'
-            }
-        }
-    }
-
+    agent none
 
     //agent any
 //    agent {
@@ -20,16 +10,26 @@ pipeline {
 //            args  '-v /tmp:/tmp'
  //       }
 //    }
-    agent { dockerfile { dir 'docker' } }
+    
 
     stages {
+        stage ('Prepare agent') {
+            agent any
+            steps {
+                sh 'pwd'
+                sh 'ls -al'
+            }
+        }
+
         stage('Prepare') {
+            agent { dockerfile { dir 'docker' } }
             steps {
                 sh 'echo xx'
                 sh 'echo xy'
             }
         }
         stage('Build') {
+            agent { dockerfile { dir 'docker' } }
             steps {
                 sh 'pwd'
                 sh 'ls -al'
@@ -37,11 +37,13 @@ pipeline {
             }
         }
         stage('Deploy') {
+            agent { dockerfile { dir 'docker' } }
             steps {
                 sh 'echo dep'
             }
         }
         stage('Tests') {
+agent any
             steps {
                 sh 'touch test.xml'
                 junit keepLongStdio: true, testResults: 'test.xml'
